@@ -49,6 +49,7 @@ function dispatcher(scene)
 		you.tap(button.retry)
 	elseif scene == 3 then
 		you.tap(button.no)
+		wrapper.exit()
 	elseif scene == 4 then
 		-- TODO: 载入中
 	elseif scene == 5 then

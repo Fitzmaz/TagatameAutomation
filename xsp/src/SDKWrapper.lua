@@ -1,8 +1,12 @@
 local wrapper =  {}
 
 function wrapper.tap(x,y)
+    local offset = 20
+    x = x + math.random(-offset, offset)
+    y = y + math.random(-offset, offset)
+    t = 50 + math.random(10)
 	touchDown(0, x, y)
-    mSleep(50)
+    mSleep(t)
     touchUp(0, x, y)
 end
 
@@ -29,6 +33,10 @@ function wrapper.init()
     local orientation = 1
     -- TODO: 适配其它方向
     init(appid, orientation)
+end
+
+function wrapper.exit()
+    lua_exit()
 end
 
 function wrapper.findColor(pointsTable)
