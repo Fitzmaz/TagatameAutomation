@@ -71,9 +71,29 @@ function button.loading()
     )
 end
 
-function button.auto()
-    -- stub
-    return -1, -1
+function button.autoEnabled()
+    return wrapper.findColorInRange(
+        {1562, 4, 1809, 100},
+        {
+            {x=0,y=0,color=0xfcf996},
+            {x=108,y=1,color=0xfcf997},
+            {x=-5,y=32,color=0x7a5f43},
+            {x=110,y=30,color=0x74593a}
+        }
+    )
+end
+
+function button.autoDisabled()
+    return wrapper.findColorInRange(
+        {1562, 4, 1809, 100},
+        {
+            {x=0,y=0,color=0x2a2214},
+            {x=-30,y=-27,color=0xa99556},
+            {x=133,y=-27,color=0xa58f51},
+            {x=-71,y=30,color=0xceb160},
+            {x=103,y=30,color=0xcfb160}
+        }
+    )
 end
 
 return button

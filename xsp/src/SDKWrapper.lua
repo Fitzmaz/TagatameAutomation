@@ -18,8 +18,14 @@ function wrapper.holdoff()
     keepScreen(false)
 end
 
-function wrapper.log(msg)
+function wrapper.sysLog(msg)
     sysLog(msg)
+end
+
+local id = createHUD()
+function wrapper.hudLog(message)
+    -- TODO: 自适应message长度
+    showHUD(id, message, 30, "0xffffffff", "0xff000000", 0, 120, 0, 260, 80)
 end
 
 function wrapper.sleep(time)
@@ -39,16 +45,24 @@ function wrapper.exit()
     lua_exit()
 end
 
-function wrapper.findColor(pointsTable)
+function _findColor(range, pointsTable)
     -- TODO: 适配其它分辨率
     return findColor(
-        {0, 0, 1919, 1079},
+        range,
         pointsTable,
         95,
         0,
         0,
         0
     )
+end
+
+function wrapper.findColor(pointsTable)
+    return _findColor({0, 0, 1919, 1079}, pointsTable)
+end
+
+function wrapper.findColorInRange(range, pointsTable)
+    return _findColor(range, pointsTable)
 end
 
 return wrapper

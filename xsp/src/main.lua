@@ -10,6 +10,7 @@ local you = require "worker"
 -- 4: 载入中
 -- 5: 战斗中
 -- 6: 结算界面
+-- 7: 战斗中自动未开启
 
 function segue(lastScene)
 	local scene = -1
@@ -17,7 +18,7 @@ function segue(lastScene)
 	wrapper.holdon()
 
 	-- 按出现频率由高到低排列，提高效率
-	if you.find(button.auto) then
+	if you.find(button.autoEnabled) then
 		scene = 5
 	elseif you.find(button.loading) then
 		scene = 4
@@ -31,8 +32,10 @@ function segue(lastScene)
 		-- TODO: 第一次出击时，体力不足和编队空缺都会alert，不好区分
 		-- TODO: alert时启动脚本，此时lastScene == -1
 		scene = lastScene + 1
+	elseif you.find(button.autoDisabled) then
+		scene = 7
 	else
-		wrapper.log("未知场景")
+		
 	end
 
 	wrapper.holdoff()
@@ -43,19 +46,25 @@ end
 function dispatcher(scene)
 	if scene == 0 then
 		you.tap(button.attack)
+		wrapper.hudLog("出击")
 	elseif scene == 1 then
 		you.tap(button.yes)
 	elseif scene == 2 then
 		you.tap(button.retry)
+		wrapper.hudLog("再挑战一次")
 	elseif scene == 3 then
 		you.tap(button.no)
 		wrapper.exit()
 	elseif scene == 4 then
-		-- TODO: 载入中
+		wrapper.hudLog("载入中")
 	elseif scene == 5 then
-		-- TODO: 战斗中
+		wrapper.hudLog("战斗中")
 	elseif scene == 6 then
 		you.tap(button.loot)
+		wrapper.hudLog("获取战利品")
+	elseif scene == 7 then
+		you.tap(button.autoDisabled)
+		wrapper.hudLog("开启自动")
 	else
 		-- 啥也不做
 	end
