@@ -70,7 +70,7 @@ function dispatcher(scene, countMax)
 	else
 		-- 啥也不做
 	end
-	local shouldStop = count >= countMax
+	local shouldStop = count > countMax
 	return shouldStop
 end
 
