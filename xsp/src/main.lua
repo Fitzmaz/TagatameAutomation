@@ -43,7 +43,8 @@ function segue(lastScene)
 	return scene
 end
 
-function dispatcher(scene)
+local count = 1
+function dispatcher(scene, countMax)
 	if scene == 0 then
 		you.tap(button.attack)
 		wrapper.hudLog("出击")
@@ -58,23 +59,29 @@ function dispatcher(scene)
 	elseif scene == 4 then
 		wrapper.hudLog("载入中")
 	elseif scene == 5 then
-		wrapper.hudLog("战斗中")
+		wrapper.hudLog(string.format("战斗中 (%d/%d)", count, countMax))
 	elseif scene == 6 then
 		you.tap(button.loot)
 		wrapper.hudLog("获取战利品")
+		count = count + 1
 	elseif scene == 7 then
 		you.tap(button.autoDisabled)
 		wrapper.hudLog("开启自动")
 	else
 		-- 啥也不做
 	end
+	local shouldStop = count >= countMax
+	return shouldStop
 end
 
 wrapper.init()
 
-local scene = -1
-while true do
+local config = wrapper.prompt()
+local countMax = tonumber(config["loopCount"])
+local scene = segue(-1)
+while not dispatcher(scene, countMax) do
 	scene = segue(scene)
-	dispatcher(scene)
 	wrapper.sleep(3000)
 end
+
+wrapper.exit()

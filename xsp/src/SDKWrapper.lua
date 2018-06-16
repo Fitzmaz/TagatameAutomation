@@ -28,6 +28,11 @@ function wrapper.hudLog(message)
     showHUD(id, message, 30, "0xffffffff", "0xff000000", 0, 120, 0, 260, 80)
 end
 
+function wrapper.prompt()
+    local ret, results = showUI('ui.json')
+    return results
+end
+
 function wrapper.sleep(time)
     mSleep(time)
 end
