@@ -96,4 +96,16 @@ function button.autoDisabled()
     )
 end
 
+function button.finish()
+    return _findColor(
+        {
+            {x=0,y=0,color=0x000fb9},
+            {x=-114,y=-59,color=0xdcf1f5},
+            {x=104,y=-60,color=0xbef5f5},
+            {x=-101,y=9,color=0x0003c8},
+            {x=98,y=10,color=0x0000b1}
+        }
+    )
+end
+
 return button
