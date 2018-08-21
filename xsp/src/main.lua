@@ -28,7 +28,9 @@ function segue()
 	elseif you.find(button.retry) then
 		scene = 2
 	elseif you.find(button.loot) and you.find(button.finish) then
-		scene = 6
+		scene = 61
+	elseif you.find(button.loot) then
+		scene = 62
 	elseif you.find(button.no) then
 		-- TODO: 体力不足和编队空缺都会alert，不好区分
 		scene = 1
@@ -59,8 +61,11 @@ function onStateChange(state)
 		wrapper.hudLog("载入中")
 	elseif scene == 5 then
 		wrapper.hudLog(string.format("战斗中 (%d/%d)", state.count + 1, state.countMax))
-	elseif scene == 6 then
+	elseif scene == 61 then
 		you.tap(button.finish)
+		wrapper.hudLog("获取战利品")
+	elseif scene == 62 then
+		you.tap(button.loot)
 		wrapper.hudLog("获取战利品")
 	elseif scene == 7 then
 		you.tap(button.autoDisabled)
@@ -81,7 +86,7 @@ function reducer(state, action)
 		-- unchanged scene
 		return
 	end
-	if currentScene == 6 then
+	if currentScene == 61 or currentScene == 62 then
 		-- counting loot
 		state.count = state.count + 1
 	end
