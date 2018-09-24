@@ -108,4 +108,31 @@ function button.finish()
     )
 end
 
+function button.towerstart()
+    return _findColor(
+        {
+            {x=0,y=0,color=0x370000},
+            {x=64,y=1,color=0x420000},
+            {x=-133,y=-66,color=0xf54841},
+            {x=124,y=-67,color=0xf64d49}
+        }
+    )
+end
+
+function button.towerend()
+    return _findColor(
+        {
+            {x=0,y=0,color=0x620f00},
+            {x=-126,y=-62,color=0xd0ac54},
+            {x=115,y=-58,color=0xb59231},
+            {x=-120,y=4,color=0x5c0a00},
+            {x=112,y=5,color=0x5c0600}
+        }
+    )
+end
+
+function button.middle()
+    return 925,500
+end
+
 return button

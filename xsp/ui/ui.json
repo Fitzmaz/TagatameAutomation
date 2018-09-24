@@ -8,6 +8,16 @@
 	"okname": "确定",
 	"views": [
 		{
+			"type": "RadioGroup",
+			"align": "center",
+			"color": "0,0,0",
+			"size": 30,
+			"id": "mode",
+			"list": "副本,异层塔",
+			"select": 0,
+			"orientation": "horizontal"
+		},
+		{
 			"type": "Edit",
 			"align": "center",
 			"color": "0,0,0",
